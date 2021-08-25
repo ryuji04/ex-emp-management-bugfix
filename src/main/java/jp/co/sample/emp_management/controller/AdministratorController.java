@@ -26,6 +26,7 @@ import jp.co.sample.emp_management.service.AdministratorService;
 @RequestMapping("/")
 public class AdministratorController {
 	
+	
 
 	@Autowired
 	private AdministratorService administratorService;
@@ -118,6 +119,17 @@ public class AdministratorController {
 			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return toLogin();
 		}
+		//管理者の名前を取得し、セッションスコープに格納するように追記
+		String administratorName= administrator.getName();
+		session.setAttribute("administratorName", administratorName);
+		
+		/**
+		String administratorMailAddress=administrator.getMailAddress();
+		model.addAttribute("administratorMailAddress",administratorMailAddress);
+		
+		String administratorPassword=administrator.getPassword();
+		model.addAttribute("administratorPassword", administratorPassword);
+		*/
 		return "forward:/employee/showList";
 	}
 	
