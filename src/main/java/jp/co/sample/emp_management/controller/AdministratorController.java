@@ -101,7 +101,7 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/")
 	public String toLogin() {
-		return "administrator/login";//ダブルサミット対策としてリダイレクトでログイン画面へ遷移するように追記
+		return "administrator/login";
 	}
 
 	/**
