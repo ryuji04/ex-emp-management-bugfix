@@ -1,5 +1,8 @@
 package jp.co.sample.emp_management.domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -145,14 +148,14 @@ public class Employee {
 	 * @return the hireDate
 	 */
 	public Date getHireDate() {
-		return hireDate;
+	return hireDate;
 	}
 
 	/**
 	 * @param hireDate the hireDate to set
 	 */
 	public void setHireDate(Date hireDate) {
-		this.hireDate = hireDate;
+		this.hireDate=hireDate;
 	}
 
 	/**

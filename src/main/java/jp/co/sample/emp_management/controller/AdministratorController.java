@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,6 +25,7 @@ import jp.co.sample.emp_management.service.AdministratorService;
 @Controller
 @RequestMapping("/")
 public class AdministratorController {
+	
 
 	@Autowired
 	private AdministratorService administratorService;
@@ -72,11 +74,18 @@ public class AdministratorController {
 	 * @return ログイン画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
-	public String insert(InsertAdministratorForm form) {
+	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
+		
+		//エラーがあった際は入力画面へ遷移するように追記
+		if(result.hasErrors()) {
+			return "administrator/insert";
+		}
+		
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
+		/**　従業員登録後、ログイン画面へ遷移するように修正しました */
 		return "administrator/login";
 	}
 
