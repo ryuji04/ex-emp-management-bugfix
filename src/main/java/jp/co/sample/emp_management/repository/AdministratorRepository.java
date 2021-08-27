@@ -58,6 +58,7 @@ public class AdministratorRepository {
 	 * @return 管理者情報 存在しない場合はnullを返します
 	 */
 	public Administrator findByMailAddressAndPassward(String mailAddress, String password) {
+		//Sqlインジェクション対策を実施
 		//文字列連結されていた「mailAddress」と「password」をプレースホルダに格納して修正
 		String sql = "select id,name,mail_address,password from administrators where mail_address=:mailAddress AND password=:password";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress",mailAddress).addValue("password",password);
