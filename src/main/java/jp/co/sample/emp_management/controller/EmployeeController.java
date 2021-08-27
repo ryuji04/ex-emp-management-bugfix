@@ -92,4 +92,7 @@ public class EmployeeController {
 		employeeService.update(employee);
 		return "redirect:/employee/showList";
 	}
+	
+	//@RequestMapping("/findByName")
+	//public String find
 }

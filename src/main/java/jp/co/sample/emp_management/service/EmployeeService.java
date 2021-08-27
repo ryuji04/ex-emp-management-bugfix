@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.sample.emp_management.domain.Employee;
+import jp.co.sample.emp_management.form.findByNameForm;
 import jp.co.sample.emp_management.repository.EmployeeRepository;
 
 /**
@@ -51,5 +52,20 @@ public class EmployeeService {
 	 */
 	public void update(Employee employee) {
 		employeeRepository.update(employee);
+	}
+	
+	public List<Employee>findByName(findByNameForm form){
+		Employee employee=new Employee();
+		employee.setName(form.getName());
+		
+		Employee employee2=employeeRepository.findByName(employee.getName());
+		List<Employee>employeeList=employeeRepository.findAll();
+		
+		
+		if(employee.getName()==null) {
+			return employeeList;
+		}else if()
+		
+		
 	}
 }
