@@ -148,4 +148,12 @@ public class AdministratorController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/create")
+	public String create() {
+		System.out.println("エラー開始");
+		System.out.println(10/2);
+		System.out.println("エラー終了");
+		return null;
+	}
+	
 }
