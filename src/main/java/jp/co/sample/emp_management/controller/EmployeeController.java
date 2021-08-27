@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.emp_management.domain.Employee;
+import jp.co.sample.emp_management.form.LoginForm;
 import jp.co.sample.emp_management.form.UpdateEmployeeForm;
 import jp.co.sample.emp_management.form.findByNameForm;
 import jp.co.sample.emp_management.repository.EmployeeRepository;
@@ -49,7 +50,13 @@ public class EmployeeController {
 	 * @return 従業員一覧画面
 	 */
 	@RequestMapping("/showList")
-	public String showList(Model model) {
+	public String showList(Model model,LoginForm form) {
+		/**AdministratorService administratorService=new AdministratorService();
+		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
+		
+		String administratorName=administrator.getName();
+		model.addAttribute("administraotorName", administratorName);
+		*/
 		List<Employee> employeeList = employeeService.showList();
 		model.addAttribute("employeeList", employeeList);
 		return "employee/list";
@@ -69,6 +76,7 @@ public class EmployeeController {
 	public String showDetail(String id, Model model) {
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
 		model.addAttribute("employee", employee);
+		
 		return "employee/detail";
 	}
 
