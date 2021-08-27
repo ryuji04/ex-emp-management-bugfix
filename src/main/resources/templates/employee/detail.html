@@ -52,7 +52,10 @@
 
 		<!-- パンくずリスト -->
 		<ol class="breadcrumb">
-			<li>従業員リスト</li>
+			<!-- 従業員リストから従業員知覧へ戻れるように追記 -->
+			<li><a th:href="@{/employee/showList}">
+			従業員リスト
+			</a></li>
 			<li class="active">従業員詳細</li>
 		</ol>
 		
@@ -141,7 +144,8 @@
 							      給料
 							    </th>
 							    <td>
-							      <span th:utext="${employee.salary + '円'}">400000円</span>
+							    <!-- 給与の表示について、3桁目にカンマが入るように追記 -->
+							      <span th:text="${#numbers.formatInteger(employee.salary,6,'COMMA')}">400000円</span>
 							    </td>
 							  </tr>
 							  <tr>

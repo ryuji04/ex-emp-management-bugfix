@@ -85,7 +85,9 @@ public class AdministratorController {
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
-		return "redirect:/login";//ダブルサミット対策としてリダイレクトでログイン画面へ遷移するように追記
+
+		/**　従業員登録後、ログイン画面へ遷移するように修正しました */
+		return "redirect:/";
 	}
 
 	/////////////////////////////////////////////////////
