@@ -19,7 +19,7 @@ import jp.co.sample.emp_management.service.AdministratorService;
 
 /**
  * 管理者情報を操作するコントローラー.
- * 
+ *
  * @author igamasayuki
  *
  */
@@ -29,23 +29,23 @@ public class AdministratorController {
 
 	@Autowired
 	private AdministratorService administratorService;
-	
+
 	@Autowired
 	private HttpSession session;
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
-	 * 
+	 *
 	 * @return フォーム
 	 */
 	@ModelAttribute
 	public InsertAdministratorForm setUpInsertAdministratorForm() {
 		return new InsertAdministratorForm();
 	}
-	
+
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
-	 * 
+	 *
 	 * @return フォーム
 	 */
 	@ModelAttribute
@@ -58,7 +58,7 @@ public class AdministratorController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 管理者登録画面を出力します.
-	 * 
+	 *
 	 * @return 管理者登録画面
 	 */
 	@RequestMapping("/toInsert")
@@ -68,24 +68,23 @@ public class AdministratorController {
 
 	/**
 	 * 管理者情報を登録します.
-	 * 
+	 *
 	 * @param form
 	 *            管理者情報用フォーム
 	 * @return ログイン画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
-	public String insert(@Validated InsertAdministratorForm form,BindingResult result,String mailAddress) {
-		//修正中
+	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
+
 		AdministratorRepository administratorRepository=new AdministratorRepository();
-		Administrator administratorFromMail=administratorRepository.findByMailAddress(mailAddress);
+		Administrator administratorFromMail=administratorRepository.findByMailAddress(form.getMailAddress());
+		System.out.println("administratorFromMailの内容"+form.getMailAddress());
 		if(administratorFromMail!=null) {
-			if(result.hasErrors()) {
-				return "administrator/insert";
-			}
-			
+			return "/insert";
 		}
-		
-		
+
+
+
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
@@ -98,7 +97,7 @@ public class AdministratorController {
 	/////////////////////////////////////////////////////
 	/**
 	 * ログイン画面を出力します.
-	 * 
+	 *
 	 * @return ログイン画面
 	 */
 	@RequestMapping("/")
@@ -108,7 +107,7 @@ public class AdministratorController {
 
 	/**
 	 * ログインします.
-	 * 
+	 *
 	 * @param form
 	 *            管理者情報用フォーム
 	 * @param result
@@ -124,13 +123,13 @@ public class AdministratorController {
 		}
 		return "forward:/employee/showList";
 	}
-	
+
 	/////////////////////////////////////////////////////
 	// ユースケース：ログアウトをする
 	/////////////////////////////////////////////////////
 	/**
 	 * ログアウトをします. (SpringSecurityに任せるためコメントアウトしました)
-	 * 
+	 *
 	 * @return ログイン画面
 	 */
 	@RequestMapping(value = "/logout")
@@ -138,5 +137,5 @@ public class AdministratorController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	
+
 }

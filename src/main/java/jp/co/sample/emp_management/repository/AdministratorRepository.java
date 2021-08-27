@@ -14,9 +14,9 @@ import jp.co.sample.emp_management.domain.Administrator;
 
 /**
  * administratorsテーブルを操作するリポジトリ.
- * 
+ *
  * @author igamasayuki
- * 
+ *
  */
 @Repository
 public class AdministratorRepository {
@@ -38,9 +38,9 @@ public class AdministratorRepository {
 
 	/**
 	 * 主キーから管理者情報を取得します.
-	 * 
+	 *
 	 * @param id ID
-	 * @return 管理者情報 
+	 * @return 管理者情報
 	 * @throws org.springframework.dao.DataAccessException 存在しない場合は例外を発生します
 	 */
 	public Administrator load(Integer id) {
@@ -49,10 +49,10 @@ public class AdministratorRepository {
 		Administrator administrator = template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
 		return administrator;
 	}
-	
+
 	/**
 	 * メールアドレスとパスワードから管理者情報を取得します.
-	 * 
+	 *
 	 * @param mailAddress メールアドレス
 	 * @param password    パスワード
 	 * @return 管理者情報 存在しない場合はnullを返します
@@ -69,7 +69,7 @@ public class AdministratorRepository {
 
 	/**
 	 * 管理者情報を挿入します.
-	 * 
+	 *
 	 * @param administrator 管理者情報
 	 */
 	public void insert(Administrator administrator) {
@@ -80,7 +80,7 @@ public class AdministratorRepository {
 
 	/**
 	 * メールアドレスから管理者情報を取得します.
-	 * 
+	 *
 	 * @param mailAddress メールアドレス
 	 * @return 管理者情報 存在しない場合はnullを返します
 	 */

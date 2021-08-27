@@ -2,17 +2,17 @@ package jp.co.sample.emp_management.form;
 
 /**
  * ログイン時に使用するフォーム.
- * 
+ *
  * @author igamasayuki
- * 
+ *
  */
 public class LoginForm {
-	
+
 	/** メールアドレス */
 	private String mailAddress;
 	/** パスワード */
 	private String password;
-	
+
 	/**
 	 * @return the mailAddress
 	 */

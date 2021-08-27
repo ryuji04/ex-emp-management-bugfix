@@ -4,9 +4,9 @@ import java.util.Date;
 
 /**
  * 従業員情報を表すドメイン.
- * 
+ *
  * @author igamasayuki
- * 
+ *
  */
 public class Employee {
 	/** id */
@@ -42,7 +42,7 @@ public class Employee {
 
 	/**
 	 * 初期化用コンストラクタ.
-	 * 
+	 *
 	 * @param id
 	 *            ID
 	 * @param name
@@ -260,5 +260,5 @@ public class Employee {
 				+ ", telephone=" + telephone + ", salary=" + salary + ", characteristics=" + characteristics
 				+ ", dependentsCount=" + dependentsCount + "]";
 	}
-	
+
 }
