@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import jp.co.sample.emp_management.domain.Employee;
 import jp.co.sample.emp_management.form.findByNameForm;
@@ -54,18 +55,28 @@ public class EmployeeService {
 		employeeRepository.update(employee);
 	}
 	
+	/**
+	 * 従業員の氏名を曖昧検索する
+	 * 
+　	 * @param form　従業員のフォームクラス
+	 * @return　検索結果
+	 */
 	public List<Employee>findByName(findByNameForm form){
-		Employee employee=new Employee();
-		employee.setName(form.getName());
 		
-		Employee employee2=employeeRepository.findByName(employee.getName());
-		List<Employee>employeeList=employeeRepository.findAll();
+		List<Employee>employeeAllList=employeeRepository.findAll();
 		
-		
-		if(employee.getName()==null) {
-			return employeeList;
-		}else if()
-		
+		//検索フォームに何も入力されなかったら全件検索結果を表示
+		if(form.getName().isEmpty()) {
+			System.out.println("検索フォームに何も検索されなかった"+employeeAllList);
+			return employeeAllList;
+			//曖昧検索が該当すればその検索結果を表示
+		}else {
+			List<Employee>employeeNameList=employeeRepository.findByName(form.getName());
+			System.out.println("検索フォームに入力された"+form.getName()+employeeNameList);
+			//model.addAttribute("model","1件も見つかりませんでした");
+			
+			return employeeNameList;
+		}		
 		
 	}
 }

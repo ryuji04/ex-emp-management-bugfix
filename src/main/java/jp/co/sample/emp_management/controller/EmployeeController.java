@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.emp_management.domain.Employee;
 import jp.co.sample.emp_management.form.UpdateEmployeeForm;
+import jp.co.sample.emp_management.form.findByNameForm;
 import jp.co.sample.emp_management.service.EmployeeService;
 
 /**
@@ -93,6 +94,18 @@ public class EmployeeController {
 		return "redirect:/employee/showList";
 	}
 	
-	//@RequestMapping("/findByName")
-	//public String find
+	/**
+	 * 従業員を曖昧検索する.
+	 * 
+	 * @param form　従業員のフォームクラス
+	 * @param model リクエストスコープに格納する
+	 * @return　従業員一覧画面
+	 */
+	@RequestMapping("/findByName")
+	public String findByName(findByNameForm form,Model model) {
+		List<Employee>employeeList=employeeService.findByName(form);
+		model.addAttribute("employeeList", employeeList);
+	return	"employee/list";
+		
+	}
 }
