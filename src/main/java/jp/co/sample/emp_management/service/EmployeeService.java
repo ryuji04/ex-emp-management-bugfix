@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.sample.emp_management.domain.Employee;
+import jp.co.sample.emp_management.form.findByNameForm;
 import jp.co.sample.emp_management.repository.EmployeeRepository;
 
 /**
@@ -51,5 +52,30 @@ public class EmployeeService {
 	 */
 	public void update(Employee employee) {
 		employeeRepository.update(employee);
+	}
+	
+	/**
+	 * 従業員の氏名を曖昧検索する
+	 * 
+　	 * @param form　従業員のフォームクラス
+	 * @return　検索結果
+	 */
+	public List<Employee>findByName(findByNameForm form){
+		
+		List<Employee>employeeAllList=employeeRepository.findAll();
+		
+		//検索フォームに何も入力されなかったら全件検索結果を表示
+		if(form.getName().isEmpty()) {
+			return employeeAllList;
+			//曖昧検索が該当すればその検索結果を表示
+		}else {
+			List<Employee>employeeNameList=employeeRepository.findByName(form.getName());
+			if(employeeNameList.size()==0) {
+				return null;
+			}
+			
+			return employeeNameList;
+		}		
+		
 	}
 }
