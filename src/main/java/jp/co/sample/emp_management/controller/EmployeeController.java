@@ -14,7 +14,6 @@ import jp.co.sample.emp_management.domain.Employee;
 import jp.co.sample.emp_management.form.LoginForm;
 import jp.co.sample.emp_management.form.UpdateEmployeeForm;
 import jp.co.sample.emp_management.form.findByNameForm;
-import jp.co.sample.emp_management.repository.EmployeeRepository;
 import jp.co.sample.emp_management.service.EmployeeService;
 
 /**
@@ -51,12 +50,7 @@ public class EmployeeController {
 	 */
 	@RequestMapping("/showList")
 	public String showList(Model model,LoginForm form) {
-		/**AdministratorService administratorService=new AdministratorService();
-		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
 		
-		String administratorName=administrator.getName();
-		model.addAttribute("administraotorName", administratorName);
-		*/
 		List<Employee> employeeList = employeeService.showList();
 		model.addAttribute("employeeList", employeeList);
 		return "employee/list";
