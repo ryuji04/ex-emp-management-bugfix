@@ -73,6 +73,10 @@
 										</label>
 										<!-- パスワードと確認用パスワードが相違していた場合エラーメッセージを表示 -->
 										<label  th:errors="*{password}" class="error-messages">
+										<span th:unless="${password==confirmationPass}" th:text="パスワードと確認用パスワードが相違しています" style="color:red;
+										font-size:large;" 
+										></span>
+										<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-messages">
 											パスワードを入力してください
 										</label>
 										<input type="password" name="password" id="password" class="form-control" placeholder="password"
@@ -85,6 +89,7 @@
 											 確認用パスワードを入力して下さい
 											 </label>
 											 <input type="password" name="confirmationPass" id="confirmationPass" class="form-control"  th:field="*{confirmationPass}" placeholder="re:password">
+
 									</div>
 								</div>
 							</div>

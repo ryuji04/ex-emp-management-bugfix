@@ -14,22 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.sample.emp_management.domain.Administrator;
 import jp.co.sample.emp_management.form.InsertAdministratorForm;
 import jp.co.sample.emp_management.form.LoginForm;
+import jp.co.sample.emp_management.repository.AdministratorRepository;
 import jp.co.sample.emp_management.service.AdministratorService;
 
 /**
  * 管理者情報を操作するコントローラー.
- * 
+ *
  * @author igamasayuki
  *
  */
 @Controller
 @RequestMapping("/")
 public class AdministratorController {
-<<<<<<< .merge_file_a14784
-=======
-	
-	
->>>>>>> .merge_file_a01920
 
 	@Autowired
 	private AdministratorService administratorService;
@@ -39,7 +35,7 @@ public class AdministratorController {
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
-	 * 
+	 *
 	 * @return フォーム
 	 */
 	@ModelAttribute
@@ -49,7 +45,7 @@ public class AdministratorController {
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
-	 * 
+	 *
 	 * @return フォーム
 	 */
 	@ModelAttribute
@@ -62,7 +58,7 @@ public class AdministratorController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 管理者登録画面を出力します.
-	 * 
+	 *
 	 * @return 管理者登録画面
 	 */
 	@RequestMapping("/toInsert")
@@ -92,19 +88,15 @@ public class AdministratorController {
 		if (result.hasErrors()) {
 				return "administrator/insert";
 			}
-		
+
+
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
-<<<<<<< .merge_file_a14784
-		/** 従業員登録後、ログイン画面へ遷移するように修正しました */
-		return "administrator/login";
-=======
 
 		/**　従業員登録後、ログイン画面へ遷移するように修正しました */
 		return "redirect:/";
->>>>>>> .merge_file_a01920
 	}
 
 	/////////////////////////////////////////////////////
@@ -112,7 +104,7 @@ public class AdministratorController {
 	/////////////////////////////////////////////////////
 	/**
 	 * ログイン画面を出力します.
-	 * 
+	 *
 	 * @return ログイン画面
 	 */
 	@RequestMapping("/")
@@ -122,9 +114,11 @@ public class AdministratorController {
 
 	/**
 	 * ログインします.
-	 * 
-	 * @param form   管理者情報用フォーム
-	 * @param result エラー情報格納用オブッジェクト
+	 *
+	 * @param form
+	 *            管理者情報用フォーム
+	 * @param result
+	 *            エラー情報格納用オブッジェクト
 	 * @return ログイン後の従業員一覧画面
 	 */
 	@RequestMapping("/login")
@@ -153,7 +147,7 @@ public class AdministratorController {
 	/////////////////////////////////////////////////////
 	/**
 	 * ログアウトをします. (SpringSecurityに任せるためコメントアウトしました)
-	 * 
+	 *
 	 * @return ログイン画面
 	 */
 	@RequestMapping(value = "/logout")
@@ -161,17 +155,5 @@ public class AdministratorController {
 		session.invalidate();
 		return "redirect:/";
 	}
-<<<<<<< .merge_file_a14784
 
-=======
-	
-	@RequestMapping("/create")
-	public String create() {
-		System.out.println("エラー開始");
-		System.out.println(10/2);
-		System.out.println("エラー終了");
-		return null;
-	}
-	
->>>>>>> .merge_file_a01920
 }

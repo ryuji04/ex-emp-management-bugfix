@@ -2,9 +2,9 @@ package jp.co.sample.emp_management.domain;
 
 /**
  * 管理者情報を表すドメイン.
- * 
+ *
  * @author igamasayuki
- * 
+ *
  */
 public class Administrator {
 	/** id(主キー) */
@@ -17,6 +17,35 @@ public class Administrator {
 	private String password;
 	/** 確認用パスワード */
 	private String confirmationPass;
+
+	/**
+	 * 引数無しのコンストラクタ.
+	 */
+	public Administrator() {
+	}
+
+	/**
+	 * 初期化用コンストラクタ.
+	 *
+	 * @param id
+	 *            id(主キー)
+	 * @param name
+	 *            名前
+	 * @param mailAddress
+	 *            メールアドレス
+	 * @param password
+	 *            パスワード
+	 */
+	public Administrator(Integer id, String name, String mailAddress, String password) {
+		this.id = id;
+		this.name = name;
+		this.mailAddress = mailAddress;
+		this.password = password;
+	}
+
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return id;
 	}
@@ -53,5 +82,4 @@ public class Administrator {
 				+ ", confirmationPass=" + confirmationPass + "]";
 	}
 
-	
 }
