@@ -25,12 +25,10 @@ import jp.co.sample.emp_management.service.AdministratorService;
 @Controller
 @RequestMapping("/")
 public class AdministratorController {
-	
-	
 
 	@Autowired
 	private AdministratorService administratorService;
-	
+
 	@Autowired
 	private HttpSession session;
 
@@ -43,7 +41,7 @@ public class AdministratorController {
 	public InsertAdministratorForm setUpInsertAdministratorForm() {
 		return new InsertAdministratorForm();
 	}
-	
+
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
 	 * 
@@ -70,17 +68,21 @@ public class AdministratorController {
 	/**
 	 * 管理者情報を登録します.
 	 * 
-	 * @param form
-	 *            管理者情報用フォーム
+	 * @param form 管理者情報用フォーム
 	 * @return ログイン画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
-	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result, String password,
+			String confirmationPass,Model model) {
+
 		
-		//エラーがあった際は入力画面へ遷移するように追記
-		if(result.hasErrors()) {
-			return "administrator/insert";
-		}
+
+			// エラーがあった際は入力画面へ遷移するように追記、またパスワードと確認用パスワードが相違していてもエラーになるように追記
+			if (result.hasErrors()||!password.equals(confirmationPass)) {
+				model.addAttribute("password",password);
+				model.addAttribute("confirmationPass",confirmationPass);
+				return "administrator/insert";
+			}
 		
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
@@ -89,6 +91,7 @@ public class AdministratorController {
 
 		/**　従業員登録後、ログイン画面へ遷移するように修正しました */
 		return "redirect:/";
+
 	}
 
 	/////////////////////////////////////////////////////
@@ -107,10 +110,8 @@ public class AdministratorController {
 	/**
 	 * ログインします.
 	 * 
-	 * @param form
-	 *            管理者情報用フォーム
-	 * @param result
-	 *            エラー情報格納用オブッジェクト
+	 * @param form   管理者情報用フォーム
+	 * @param result エラー情報格納用オブッジェクト
 	 * @return ログイン後の従業員一覧画面
 	 */
 	@RequestMapping("/login")
@@ -133,7 +134,7 @@ public class AdministratorController {
 		*/
 		return "forward:/employee/showList";
 	}
-	
+
 	/////////////////////////////////////////////////////
 	// ユースケース：ログアウトをする
 	/////////////////////////////////////////////////////
@@ -147,13 +148,5 @@ public class AdministratorController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	
-	@RequestMapping("/create")
-	public String create() {
-		System.out.println("エラー開始");
-		System.out.println(10/2);
-		System.out.println("エラー終了");
-		return null;
-	}
-	
+
 }
