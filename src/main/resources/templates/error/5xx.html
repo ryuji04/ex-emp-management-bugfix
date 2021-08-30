@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ページを表示出来ませんでした</title>
+</head>
+<body>
+<h5>以下のいずれかの理由でシステムの操作を中断しました</h5>
+
+<ol>
+<li>不正な操作が行われた</li>
+<li>長い時間操作を行わなかった</li>
+<li>現在システムのメンテナンス中</li>
+</ol>
+
+しばらくたってからもう一度操作してください<br>
+<br>
+
+<a style="font-size:30px;"th:href="@{/}">ログイン画面</a>
+</body>
+</html>

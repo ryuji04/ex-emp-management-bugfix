@@ -40,7 +40,8 @@
 						<li class="active"><a href="list.html" th:href="@{/employee/showList}">従業員管理</a></li>
 					</ul>
 					<p class="navbar-text navbar-right">
-						<span th:text="${administratorName}">山田太郎</span>さんこんにちは！
+					<!-- セッションスコープに格納した管理者の名前を表示するように追記 -->
+						<span th:text="${session.administratorName}">山田太郎</span>さんこんにちは！
 						&nbsp;&nbsp;&nbsp;
 						<a href="../administrator/login.html" class="navbar-link" th:href="@{/logout}">ログアウト</a>
 					</p>
@@ -51,6 +52,12 @@
 		</nav>
 		
 		<!-- パンくずリスト -->
+		<form th:action="@{/employee/findByName}" method="post">
+		<span>従業員名検索:</span>
+		<input type="text" name="name">
+		<button>検索</button>
+		</form>
+		<span th:text="${model}" style="color:red;"></span>
 		<ol class="breadcrumb">
 			<li class="active"><a href="list.html" th:href="@{/employee/showList}">従業員リスト</a></li>
 		</ol>
@@ -77,6 +84,7 @@
 							<td>
 								<a href="detail.html" th:href="@{'/employee/showDetail?id=' + ${employee.id}}">
 									<span th:text="${employee.name}">山田太郎</span>
+									
 								</a>
 							</td>
 							<td>
