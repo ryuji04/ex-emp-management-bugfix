@@ -68,24 +68,26 @@ public class AdministratorController {
 
 	/**
 	 * 管理者情報を登録します.
-	 *
-	 * @param form
-	 *            管理者情報用フォーム
+	 * 
+	 * @param form 管理者情報用フォーム
 	 * @return ログイン画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
-	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result, String password,
+			String confirmationPass,Model model) {
 
-		Administrator administratorFromMail=administratorService.findByMailAddress(form.getMailAddress());
-		System.out.println("administratorFromMail:"+administratorFromMail);
-		//メールアドレスから管理者を検索した結果nullでなかったら既に登録されているメールアドレスとしてエラーを呼ぶ.
-		if(administratorFromMail!=null) {
-			result.rejectValue("mailAddress", null,"既に登録されているメールアドレスです");
-		}
 		
-		if(administratorFromMail!=null) {
-			return toInsert();
-		}
+
+			// エラーがあった際は入力画面へ遷移するように追記、またパスワードと確認用パスワードが相違していてもエラーになるように追記
+			if(!form.getPassword().equalsIgnoreCase(confirmationPass)){
+				result.rejectValue("password",null,"確認用パスワードと異なります");
+				result.rejectValue("confirmationPass",null,"パスワードと異なります");
+			}
+		
+		
+		if (result.hasErrors()) {
+				return "administrator/insert";
+			}
 
 
 		Administrator administrator = new Administrator();
@@ -95,7 +97,6 @@ public class AdministratorController {
 
 		/**　従業員登録後、ログイン画面へ遷移するように修正しました */
 		return "redirect:/";
-
 	}
 
 	/////////////////////////////////////////////////////
