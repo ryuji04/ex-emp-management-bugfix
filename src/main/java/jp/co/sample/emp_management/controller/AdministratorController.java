@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.sample.emp_management.domain.Administrator;
 import jp.co.sample.emp_management.form.InsertAdministratorForm;
 import jp.co.sample.emp_management.form.LoginForm;
+import jp.co.sample.emp_management.repository.AdministratorRepository;
 import jp.co.sample.emp_management.service.AdministratorService;
 
 /**
  * 管理者情報を操作するコントローラー.
- * 
+ *
  * @author igamasayuki
  *
  */
@@ -34,7 +35,7 @@ public class AdministratorController {
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
-	 * 
+	 *
 	 * @return フォーム
 	 */
 	@ModelAttribute
@@ -44,7 +45,7 @@ public class AdministratorController {
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
-	 * 
+	 *
 	 * @return フォーム
 	 */
 	@ModelAttribute
@@ -57,7 +58,7 @@ public class AdministratorController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 管理者登録画面を出力します.
-	 * 
+	 *
 	 * @return 管理者登録画面
 	 */
 	@RequestMapping("/toInsert")
@@ -67,23 +68,26 @@ public class AdministratorController {
 
 	/**
 	 * 管理者情報を登録します.
-	 * 
-	 * @param form 管理者情報用フォーム
+	 *
+	 * @param form
+	 *            管理者情報用フォーム
 	 * @return ログイン画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
-	public String insert(@Validated InsertAdministratorForm form, BindingResult result, String password,
-			String confirmationPass,Model model) {
+	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
 
+		Administrator administratorFromMail=administratorService.findByMailAddress(form.getMailAddress());
+		System.out.println("administratorFromMail:"+administratorFromMail);
+		//メールアドレスから管理者を検索した結果nullでなかったら既に登録されているメールアドレスとしてエラーを呼ぶ.
+		if(administratorFromMail!=null) {
+			result.rejectValue("mailAddress", null,"既に登録されているメールアドレスです");
+		}
 		
+		if(administratorFromMail!=null) {
+			return toInsert();
+		}
 
-			// エラーがあった際は入力画面へ遷移するように追記、またパスワードと確認用パスワードが相違していてもエラーになるように追記
-			if (result.hasErrors()||!password.equals(confirmationPass)) {
-				model.addAttribute("password",password);
-				model.addAttribute("confirmationPass",confirmationPass);
-				return "administrator/insert";
-			}
-		
+
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
@@ -99,7 +103,7 @@ public class AdministratorController {
 	/////////////////////////////////////////////////////
 	/**
 	 * ログイン画面を出力します.
-	 * 
+	 *
 	 * @return ログイン画面
 	 */
 	@RequestMapping("/")
@@ -109,9 +113,11 @@ public class AdministratorController {
 
 	/**
 	 * ログインします.
-	 * 
-	 * @param form   管理者情報用フォーム
-	 * @param result エラー情報格納用オブッジェクト
+	 *
+	 * @param form
+	 *            管理者情報用フォーム
+	 * @param result
+	 *            エラー情報格納用オブッジェクト
 	 * @return ログイン後の従業員一覧画面
 	 */
 	@RequestMapping("/login")
@@ -140,7 +146,7 @@ public class AdministratorController {
 	/////////////////////////////////////////////////////
 	/**
 	 * ログアウトをします. (SpringSecurityに任せるためコメントアウトしました)
-	 * 
+	 *
 	 * @return ログイン画面
 	 */
 	@RequestMapping(value = "/logout")

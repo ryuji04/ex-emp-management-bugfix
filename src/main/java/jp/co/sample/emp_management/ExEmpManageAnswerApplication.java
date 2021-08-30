@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * SpringBootアプリ起動クラス.
- * 
+ *
  * @author igamasayuki
  *
  */
@@ -14,7 +14,7 @@ public class ExEmpManageAnswerApplication {
 
 	/**
 	 * 処理の起点となるメソッド.
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void main(String[] args) {

@@ -6,9 +6,9 @@ import javax.validation.constraints.Size;
 
 /**
  * 管理者情報登録時に使用するフォーム.
- * 
+ *
  * @author igamasayuki
- * 
+ *
  */
 public class InsertAdministratorForm {
 	/** 名前 */
@@ -64,11 +64,11 @@ public class InsertAdministratorForm {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "InsertAdministratorForm [name=" + name + ", mailAddress=" + mailAddress + ", password=" + password
 				+ "]";
 	}
-	
+
 }

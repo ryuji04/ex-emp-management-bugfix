@@ -2,9 +2,9 @@ package jp.co.sample.emp_management.domain;
 
 /**
  * 管理者情報を表すドメイン.
- * 
+ *
  * @author igamasayuki
- * 
+ *
  */
 public class Administrator {
 	/** id(主キー) */
@@ -24,7 +24,7 @@ public class Administrator {
 
 	/**
 	 * 初期化用コンストラクタ.
-	 * 
+	 *
 	 * @param id
 	 *            id(主キー)
 	 * @param name
@@ -102,5 +102,5 @@ public class Administrator {
 		return "Administrator [id=" + id + ", name=" + name + ", mailAddress=" + mailAddress + ", password=" + password
 				+ "]";
 	}
-	
+
 }

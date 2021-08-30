@@ -19,7 +19,7 @@ import jp.co.sample.emp_management.service.EmployeeService;
 
 /**
  * 従業員情報を操作するコントローラー.
- * 
+ *
  * @author igamasayuki
  *
  */
@@ -32,7 +32,7 @@ public class EmployeeController {
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
-	 * 
+	 *
 	 * @return フォーム
 	 */
 	@ModelAttribute
@@ -45,7 +45,7 @@ public class EmployeeController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 従業員一覧画面を出力します.
-	 * 
+	 *
 	 * @param model モデル
 	 * @return 従業員一覧画面
 	 */
@@ -63,6 +63,16 @@ public class EmployeeController {
 		//test pull request
 	}
 
+<<<<<<< .merge_file_a09612
+
+	/////////////////////////////////////////////////////
+	// ユースケース：従業員詳細を表示する
+	/////////////////////////////////////////////////////
+	/**
+	 * 従業員詳細画面を出力します.
+	 *
+	 * @param id リクエストパラメータで送られてくる従業員ID
+=======
 	/////////////////////////////////////////////////////
 	// ユースケース：従業員詳細を表示する
 	/////////////////////////////////////////////////////
@@ -70,6 +80,7 @@ public class EmployeeController {
 	 * 従業員詳細画面を出力します.
 	 * 
 	 * @param id    リクエストパラメータで送られてくる従業員ID
+>>>>>>> .merge_file_a07188
 	 * @param model モデル
 	 * @return 従業員詳細画面
 	 */
@@ -86,8 +97,14 @@ public class EmployeeController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 従業員詳細(ここでは扶養人数のみ)を更新します.
+<<<<<<< .merge_file_a09612
+	 *
+	 * @param form
+	 *            従業員情報用フォーム
+=======
 	 * 
 	 * @param form 従業員情報用フォーム
+>>>>>>> .merge_file_a07188
 	 * @return 従業員一覧画面へリダクレクト
 	 */
 	@RequestMapping("/update")
