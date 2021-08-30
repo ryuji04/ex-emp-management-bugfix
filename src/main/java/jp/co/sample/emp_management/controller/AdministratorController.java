@@ -78,9 +78,13 @@ public class AdministratorController {
 		
 
 			// エラーがあった際は入力画面へ遷移するように追記、またパスワードと確認用パスワードが相違していてもエラーになるように追記
-			if (result.hasErrors()||!password.equals(confirmationPass)) {
-				model.addAttribute("password",password);
-				model.addAttribute("confirmationPass",confirmationPass);
+			if(!form.getPassword().equalsIgnoreCase(confirmationPass)){
+				result.rejectValue("password",null,"確認用パスワードと異なります");
+				result.rejectValue("confirmationPass",null,"パスワードと異なります");
+			}
+		
+		
+		if (result.hasErrors()) {
 				return "administrator/insert";
 			}
 		

@@ -17,6 +17,8 @@ public class LoginForm {
 	/** パスワード */
 	private String password;
 	
+	
+	
 	/**
 	 * @return the mailAddress
 	 */
