@@ -76,11 +76,15 @@ public class AdministratorController {
 	@RequestMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
 
-		AdministratorRepository administratorRepository=new AdministratorRepository();
-		Administrator administratorFromMail=administratorRepository.findByMailAddress(form.getMailAddress());
-		System.out.println("administratorFromMailの内容"+form.getMailAddress());
+		Administrator administratorFromMail=administratorService.findByMailAddress(form.getMailAddress());
+		System.out.println("administratorFromMail:"+administratorFromMail);
+		//メールアドレスから管理者を検索した結果nullでなかったら既に登録されているメールアドレスとしてエラーを呼ぶ.
 		if(administratorFromMail!=null) {
-			return "/insert";
+			result.rejectValue("mailAddress", null,"既に登録されているメールアドレスです");
+		}
+		
+		if(administratorFromMail!=null) {
+			return toInsert();
 		}
 
 

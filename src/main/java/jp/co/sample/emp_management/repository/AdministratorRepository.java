@@ -86,8 +86,9 @@ public class AdministratorRepository {
 	 */
 	public Administrator findByMailAddress(String mailAddress) {
 		String sql = "select id,name,mail_address,password from administrators where mail_address=:mailAddress";
-		SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress", mailAddress);
+		SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress",mailAddress);
 		List<Administrator> administratorList = template.query(sql, param, ADMINISTRATOR_ROW_MAPPER);
+		System.out.println("administratorList:"+administratorList);
 		if (administratorList.size() == 0) {
 			return null;
 		}
