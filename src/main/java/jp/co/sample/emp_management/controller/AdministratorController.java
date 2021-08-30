@@ -26,6 +26,8 @@ import jp.co.sample.emp_management.service.AdministratorService;
 @Controller
 @RequestMapping("/")
 public class AdministratorController {
+	
+	
 
 	@Autowired
 	private AdministratorService administratorService;
@@ -75,6 +77,7 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
+<<<<<<< .merge_file_a01652
 
 		Administrator administratorFromMail=administratorService.findByMailAddress(form.getMailAddress());
 		System.out.println("administratorFromMail:"+administratorFromMail);
@@ -89,11 +92,21 @@ public class AdministratorController {
 
 
 
+=======
+		
+		//エラーがあった際は入力画面へ遷移するように追記
+		if(result.hasErrors()) {
+			return "administrator/insert";
+		}
+		
+>>>>>>> .merge_file_a25580
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
-		return "administrator/login";
+
+		/**　従業員登録後、ログイン画面へ遷移するように修正しました */
+		return "redirect:/";
 	}
 
 	/////////////////////////////////////////////////////
@@ -125,6 +138,17 @@ public class AdministratorController {
 			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return toLogin();
 		}
+		//管理者の名前を取得し、セッションスコープに格納するように追記
+		String administratorName= administrator.getName();
+		session.setAttribute("administratorName", administratorName);
+		
+		/**
+		String administratorMailAddress=administrator.getMailAddress();
+		model.addAttribute("administratorMailAddress",administratorMailAddress);
+		
+		String administratorPassword=administrator.getPassword();
+		model.addAttribute("administratorPassword", administratorPassword);
+		*/
 		return "forward:/employee/showList";
 	}
 
@@ -141,5 +165,17 @@ public class AdministratorController {
 		session.invalidate();
 		return "redirect:/";
 	}
+<<<<<<< .merge_file_a01652
 
+=======
+	
+	@RequestMapping("/create")
+	public String create() {
+		System.out.println("エラー開始");
+		System.out.println(10/2);
+		System.out.println("エラー終了");
+		return null;
+	}
+	
+>>>>>>> .merge_file_a25580
 }
